@@ -24,7 +24,7 @@ print(test_set.classes[target])
 img.show()
 '''
 download = False
-# 把書據要transforms一次寫一起, 用list包起來即可依序transforms
+# 把數據要transforms一次寫一起, 用list包起來即可依序transforms
 dataset_transform = torchvision.transforms.Compose([
     torchvision.transforms.ToTensor()
 ])
