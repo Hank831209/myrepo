@@ -8,11 +8,11 @@ img_path = r'./hymenoptera_data/train/ants/0013035.jpg'
 # img = Image.open(img_path)
 img = cv2.imread(img_path)
 
-# writer = SummaryWriter("logs")
+writer = SummaryWriter("logs")  # 按ctrl + P可以看書要輸入啥參數
 tensor_trans = transforms.ToTensor()  # 創建一個ToTensor這個class的物件, 可讀PIL Image or np.array
-tensor_img = tensor_trans(img)  # 調用ToTensor這個class的 __call__方法, 轉為tensor
-# writer.add_image('Tensor_img', tensor_img)
-# writer.close()
+tensor_img = tensor_trans(img)        # 調用ToTensor這個class的 __call__方法, 轉為tensor
+writer.add_image('Tensor_img', tensor_img)
+writer.close()
 
 
 
