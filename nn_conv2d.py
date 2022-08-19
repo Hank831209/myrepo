@@ -10,7 +10,7 @@ dataset = torchvision.datasets.CIFAR10(
     transform=torchvision.transforms.ToTensor(),
     download=True
 )
-
+# 圖片大小: torch.Size([3, 32, 32])
 dataloader = DataLoader(dataset, batch_size=64)
 
 
@@ -25,23 +25,19 @@ class Tudui(nn.Module):
 
 
 tudui = Tudui()
-
-writer = SummaryWriter("../logs")
-
+# print(tudui)
+writer = SummaryWriter("logs")
+#
 step = 0
 for data in dataloader:
     imgs, targets = data
     output = tudui(imgs)
-    print(imgs.shape)
-    print(output.shape)
-    # torch.Size([64, 3, 32, 32])
+    print(imgs.shape)  # torch.Size([64, 3, 32, 32])
+    print(output.shape)  # torch.Size([64, 6, 30, 30])
     writer.add_images("input", imgs, step)
-    # torch.Size([64, 6, 30, 30])  -> [xxx, 3, 30, 30]
-
-    output = torch.reshape(output, (-1, 3, 30, 30))
+    output = torch.reshape(output, (-1, 3, 30, 30))  # torch.Size([64, 6, 30, 30])  -> [xxx, 3, 30, 30]
     writer.add_images("output", output, step)
-
     step = step + 1
 
 writer.close()
-
+#

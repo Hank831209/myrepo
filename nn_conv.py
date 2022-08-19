@@ -18,6 +18,8 @@ kernel = torch.reshape(kernel, (1, 1, 3, 3))
 print(input.shape)
 print(kernel.shape)
 
+# input –
+# input tensor of shape (\text{minibatch} , \text{in\_channels} , iH , iW)(minibatch,in_channels,iH,iW)
 output = F.conv2d(input, kernel, stride=1)
 print(output)
 
@@ -26,5 +28,6 @@ print(output2)
 
 output3 = F.conv2d(input, kernel, stride=1, padding=1)
 print(output3)
+
 
 
