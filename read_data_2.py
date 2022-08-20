@@ -6,8 +6,6 @@ from torchvision import transforms
 from torch.utils.tensorboard import SummaryWriter
 from torchvision.utils import make_grid
 
-writer = SummaryWriter("logs")
-
 
 class MyData(Dataset):
 
@@ -45,8 +43,9 @@ class MyData(Dataset):
 
 
 if __name__ == '__main__':
+    # writer = SummaryWriter("logs")
     transform = transforms.Compose([transforms.Resize((256, 256)), transforms.ToTensor()])
-    root_dir = "dataset/train"
+    root_dir = "Data/data/train"
     image_ants = "ants_image"
     label_ants = "ants_label"
     ants_dataset = MyData(root_dir, image_ants, label_ants, transform)
@@ -54,16 +53,17 @@ if __name__ == '__main__':
     label_bees = "bees_label"
     bees_dataset = MyData(root_dir, image_bees, label_bees, transform)
     train_dataset = ants_dataset + bees_dataset
+    sample = train_dataset[0]
 
     # transforms = transforms.Compose([transforms.Resize(256, 256)])
     dataloader = DataLoader(train_dataset, batch_size=1, num_workers=2)
 
-    writer.add_image('error', train_dataset[119]['img'])
-    writer.close()
-    # for i, j in enumerate(dataloader):
-    #     # imgs, labels = j
-    #     print(type(j))
-    #     print(i, j['img'].shape)
+    # writer.add_image('error', train_dataset[119]['img'])
+    # writer.close()
+    for i, j in enumerate(dataloader):
+        # imgs, labels = j
+        print(type(j))
+        print(i, j['img'].shape)
     #     # writer.add_image("train_data_b2", make_grid(j['img']), i)
     #
     # writer.close()

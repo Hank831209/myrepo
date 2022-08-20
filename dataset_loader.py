@@ -5,11 +5,18 @@ from torch.utils.tensorboard import SummaryWriter
 
 dataset_transform = torchvision.transforms.Compose([torchvision.transforms.ToTensor()])
 test_data = torchvision.datasets.CIFAR10(
-    root='dataset',
+    root='Data/dataset',
     train=False,
     transform=dataset_transform,
     download=False
 )
+
+# 測試數據集中第一張圖片及target
+img, target = test_data[0]
+print(type(test_data), type(test_data[0]))
+print(img.shape, type(img), img.dtype)
+print(target, type(target))
+
 # drop_last=True 除不盡就不取啦
 test_loader = DataLoader(
     dataset=test_data,
@@ -19,22 +26,18 @@ test_loader = DataLoader(
     num_workers=0
 )
 
-# 測試數據集中第一張圖片及target
-img, target = test_data[0]
-print(img.shape)
-print(target)
 
-writer = SummaryWriter('logs')
+# writer = SummaryWriter('logs')
 # test_loader尺寸和label
 for epoch in range(2):
     step = 0
     for data in test_loader:
         img, target = data
-        writer.add_images('Epoch:_{}_False'.format(epoch), img, step)  # dataformats="NCHW"
+        # writer.add_images('Epoch:_{}_False'.format(epoch), img, step)  # dataformats="NCHW"
         step = step + 1
         # print(img.shape)
         # print(target)
         # torch.Size([4, 3, 32, 32]), [batch_size, C, H, W]
         # tensor([9, 5, 9, 3])
-writer.close()
+# writer.close()
 
