@@ -62,8 +62,8 @@ if __name__ == '__main__':
     # writer.close()
     for i, j in enumerate(dataloader):
         # imgs, labels = j
-        print(type(j))
-        print(i, j['img'].shape)
+        print(j)
+        # print(i, j['img'].shape)
     #     # writer.add_image("train_data_b2", make_grid(j['img']), i)
     #
     # writer.close()
